@@ -169,3 +169,17 @@ error{
     font-style: italic;
     color: red;
 }
+
+@media only screen and (max-width:1383px)
+{
+    #citystatezip
+    {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+    .column
+    {
+        margin-bottom: 10px;
+    }
+}
