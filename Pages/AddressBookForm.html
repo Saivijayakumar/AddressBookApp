@@ -20,7 +20,7 @@
         </div>
     </header>
     <div class="form-content">
-        <form class="form">
+        <form class="form" onsubmit="save()">
             <div class="form-head">
                 person address form<span><img src="../assests/cancelButton.png" class=" redirectHome"/>
             </div>
@@ -68,13 +68,13 @@
                     </div>
                     <div class="column">
                         <label for="zip" class="label text">Zip Code</label>
-                        <input type="number" id="zip" class="zipcode" placeholder=" Zip Code">
+                        <input type="text" id="zip" class="zipcode" placeholder=" Zip Code">
                         <error class="zip-error" for="zipcode"></error>
                     </div>
                 </div>
             </div>
             <div class="submit-reset buttonParent">
-                <button type="submit" class="button submitButton">Submit</button>
+                <button type="submit" class="button submitButton">Add</button>
                 <button type="reset" class="resetButton button">Reset</button>
             </div>
         </form>

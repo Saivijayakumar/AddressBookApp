@@ -83,7 +83,6 @@ class ContactDetails
     }
 
     toString(){
-        return "Name : "+this.fullname+" || Phone Number: "+this.phoneNumber+" || Address: "+this.address+" || City: "+this.city+" || State: "+this.state+
-        " || zip: "+this.zip;
+        return "Name : "+this.fullName+" | Phone Number: "+this.phoneNumber+" | Address: "+this.address+" | City: "+this.city+" | State: "+this.state+" | zip: "+this.zip;
     }
 }
