@@ -12,12 +12,72 @@
 <body>
     <header class="header-content">
         <div class="logo-content">
-            <img src="../assests/Address-Book icon.ico" alt="Logo" width="48" height="50">
+            <img src="../assests/addressBook.png" alt="Logo" width="48" height="50">
             <div>
                 <span class="ab-text" >address</span><br>
                 <span class="ab-text ab-book" >book</span>
             </div>
         </div>
     </header>
+    <div class="form-content">
+        <form class="form">
+            <div class="form-head">
+                person address form<span><img src="../assests/cancelButton.png" class=" redirectHome"/>
+            </div>
+            <div class="row-content">
+                <label class="lable text" for="name">Full Name</label>
+                <input class="input" type="text" id="name" name="name" placeholder="Name..." required>
+                <error class="text-error" for="name"></error>
+            </div>
+            <div class="row-content">
+                <label class="lable text" for="phonenumber">Phone Number</label>
+                <input class="input" type="number" id="phonenumber" name="phonenumber" placeholder="" required>
+                <error class="number-error" for="number"></error>
+            </div>
+            <div class="row-content" >
+                <label class="lable text" for="address" >Address</label>
+                <textarea id="address" class="input" name="address" placeholder="" style="height:100px"></textarea>
+            </div>
+            <div class="row-content">
+                <div id="citystatezip">
+
+                    <div class="column">
+                        <label for="Address" class="label text">City</label>
+                        <select name="City" id="city">
+                            <option>Select City</option>
+                            <option value="Nellore">Nellore</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Punjab">Punjab</option>
+                        </select>
+                    </div>
+
+                    <div class="column">
+                        <label for="State" class="label text">State</label>
+                        <select id="State" name="state" >
+                            <option>Select State</option>
+                            <option value="Otty">Otty</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="AndhraPradesh">AndhraPradesh</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                        </select>
+                    </div>
+                    <div class="column">
+                        <label for="zip" class="label text">Zip Code</label>
+                        <input type="number" id="zip" class="zipcode" placeholder=" Zip Code">
+                        <error class="zip-error" for="zipcode"></error>
+                    </div>
+                </div>
+            </div>
+            <div class="submit-reset buttonParent">
+                <button type="submit" class="button submitButton">Submit</button>
+                <button type="reset" class="resetButton button">Reset</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
