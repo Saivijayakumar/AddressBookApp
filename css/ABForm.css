@@ -156,7 +156,7 @@ color: white;
 border: 1px solid #969696;
 
 }
-.submit-reset > button[type="reset"]:hover
+.submit-reset > button[type="reset"]:hover,.redirectHome:hover
 {
     background-color:red;
     color: white;
