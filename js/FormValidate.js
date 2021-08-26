@@ -39,57 +39,36 @@ const setTextValue = (id, value) => {
 }
 
 //For saving
-
-const save = () => {
+//
+const save = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
   try {
-    let singleContactDetails = RetriveData();
-    createAndUpdateStorage(singleContactDetails);
+    setContactDetailsObj();
+    createAndUpdateStorage();
+    resetForm();
+    window.location.replace(siteProperties.HomePage);
   }
   catch (e) {
-    return;
+    alert(e);
   }
 }
-
-const RetriveData = () => {
-  let singleContactDetails = new ContactDetails();
-  try {
-    singleContactDetails.fullName = getInputValueById("#name");
-  }
-  catch (e) {
-    setTextValue(".text-error", e);
-    throw e;
-  }
-  singleContactDetails.state = getInputValueById('#State');
-  singleContactDetails.city = getInputValueById('#city');
-  singleContactDetails.address = getInputValueById("#address");
-  try {
-    singleContactDetails.zip = getInputValueById('#zip');
-    setTextValue(".zip-error", "");
-  }
-  catch (e) {
-    setTextValue(".zip-error", e);
-  }
-  try {
-    singleContactDetails.phoneNumber = getInputValueById('#phonenumber');
-    setTextValue(".number-error", "");
-  }
-  catch (e) {
-    setTextValue(".number-error", e);
-  }
-
-  alert(singleContactDetails.toString());
-  return singleContactDetails;
-}
-
-function createAndUpdateStorage(singleContactDetails) {
+//
+const createAndUpdateStorage = () => {
   let ContactList = JSON.parse(localStorage.getItem("ContactList"));
-  if (ContactList != undefined) {
-    ContactList.push(singleContactDetails);
+  if (ContactList) {
+    let contactData = ContactList.find(x => x._id == ContactDetailsObj._id);
+    if (!contactData) {
+      ContactList.push(createContactData());
+    }
+    else {
+      const index = ContactList.map(x => x._id).indexOf(contactData._id);
+      ContactList.splice(index, 1, createContactData(contactData._id));
+    }
   }
   else {
-    ContactList = [singleContactDetails];
+    ContactList = [createContactData()];
   }
-  alert(ContactList.toString());
   localStorage.setItem("ContactList", JSON.stringify(ContactList));
 }
 
@@ -118,4 +97,68 @@ const setForm = () => {
 const setValue = (id, value) => {
   const element = document.querySelector(id);
   element.value = value;
+}
+//storeing the data to local storage
+const setContactDetailsObj = () => {
+  ContactDetailsObj._fullName = getInputValueById('#name');
+  ContactDetailsObj._phoneNumber = getInputValueById('#phonenumber');
+  ContactDetailsObj._address = getInputValueById('#address');
+  ContactDetailsObj._state = getInputValueById('#State');
+  ContactDetailsObj._city = getInputValueById('#city');
+  ContactDetailsObj._zip = getInputValueById('#zip');
+}
+
+const createContactData = (id) => {
+  let contactData = new ContactDetails();
+  if (!id) contactData.id = createNewContactId();
+  else contactData.id = id;
+  setContactData(contactData);
+  return contactData;
+}
+
+const setContactData = (contactData) => {
+  try {
+    contactData.fullName = ContactDetailsObj._fullName;
+  }
+  catch (e) {
+    setTextValue(".text-error", e);
+    throw e;
+  }
+  contactData.state = ContactDetailsObj._state;
+  contactData.city = ContactDetailsObj._city;
+  contactData.address = ContactDetailsObj._address;
+  try {
+    contactData.zip = ContactDetailsObj._zip;
+    setTextValue(".zip-error", "");
+  }
+  catch (e) {
+    setTextValue(".zip-error", e);
+  }
+  try {
+    contactData.phoneNumber = ContactDetailsObj._phoneNumber;
+    setTextValue(".number-error", "");
+  }
+  catch (e) {
+    setTextValue(".number-error", e);
+  }
+
+  alert(contactData.toString());
+}
+
+const createNewContactId = () => {
+  let contactID = localStorage.getItem("contactID");
+  contactID = !contactID ? 1 : (parseInt(contactID) + 1).toString();
+  localStorage.setItem("contactID", contactID);
+  return contactID;
+}
+
+const resetForm = () => {
+  setValue('#name', '');
+  setValue('#phonenumber', '');
+  setValue('#address', '');
+  setValue('#city', '');
+  setValue('#State', '');
+  setTextValue('.text-error', '');
+  setTextValue('.number-error', '');
+  setTextValue('.zip-error', '');
 }

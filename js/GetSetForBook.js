@@ -1,5 +1,13 @@
 class ContactDetails
 {
+    get id()
+    {
+        return this._id;
+    }
+    set id(id)
+    {
+        this._id = id;
+    }
     get fullName()
     {
         return this._fullName;
@@ -83,6 +91,6 @@ class ContactDetails
     }
 
     toString(){
-        return "Name : "+this.fullName+" | Phone Number: "+this.phoneNumber+" | Address: "+this.address+" | City: "+this.city+" | State: "+this.state+" | zip: "+this.zip;
+        return (`ID : ${this.id} | Name : ${this.fullName} | Phone Number : ${this.phoneNumber} | Address : ${this.address} | City : ${this.city} | State : ${this.state} | Zip : ${this.zip}`);
     }
 }

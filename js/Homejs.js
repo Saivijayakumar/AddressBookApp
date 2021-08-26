@@ -3,6 +3,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     ContactDetailsList = getEmployeePayrollDataFromLocalStorage();
     document.querySelector(".person-count").textContent = ContactDetailsList.length;
     createInnerHtml();
+    localStorage.removeItem("editContact");
 });
 
 const getEmployeePayrollDataFromLocalStorage = () => {
