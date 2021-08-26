@@ -25,7 +25,7 @@ const createInnerHtml = () => {
                 <td>${contactData._phoneNumber}</td>
                 <td>
                     <img id="${contactData._fullName}" onclick="remove(this)" alt="delete" src="../assests/homepage/delete-black-18dp.svg">
-                    <img id="1" onclick="update(this)" alt="Update" src="../assests/homepage/create-black-18dp.svg">
+                    <img id="${contactData._fullName}" onclick="update(this)" alt="Update" src="../assests/homepage/create-black-18dp.svg">
                 </td>
         </tr>
         `;
@@ -42,4 +42,11 @@ const remove = (node)=>{
     localStorage.setItem('ContactList',JSON.stringify(ContactDetailsList));
     document.querySelector(".person-count").textContent = ContactDetailsList.length;
     createInnerHtml();
+}
+//when we click on edit, first we have to store it in one obj
+const update = (node)=>{
+    let personData = ContactDetailsList.find(x=>x._fullName == node.id);
+    if(!personData) return;
+    localStorage.setItem('editContact',JSON.stringify(personData));
+    window.location.replace(siteProperties.FormPage);
 }
