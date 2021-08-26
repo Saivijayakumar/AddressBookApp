@@ -1,7 +1,7 @@
 let ContactDetailsList;
 window.addEventListener('DOMContentLoaded', (event) => {
     ContactDetailsList = getEmployeePayrollDataFromLocalStorage();
-    document.querySelector(".emp-count").textContent = ContactDetailsList.length;
+    document.querySelector(".person-count").textContent = ContactDetailsList.length;
     createInnerHtml();
 });
 
@@ -24,11 +24,22 @@ const createInnerHtml = () => {
                 <td>${contactData._zip}</td>
                 <td>${contactData._phoneNumber}</td>
                 <td>
-                    <img id="1" onclick="remove(this)" alt="delete" src="../assests/homepage/delete-black-18dp.svg">
+                    <img id="${contactData._fullName}" onclick="remove(this)" alt="delete" src="../assests/homepage/delete-black-18dp.svg">
                     <img id="1" onclick="update(this)" alt="Update" src="../assests/homepage/create-black-18dp.svg">
                 </td>
         </tr>
         `;
     }
     document.querySelector('#display').innerHTML = innerHtml;
+}
+
+//remove person from Address Book
+const remove = (node)=>{
+    let personData = ContactDetailsList.find(x=>x._fullName == node.id);
+    if(!personData) return;
+    const index = ContactDetailsList.map(x=>x._fullName).indexOf(personData._fullName);
+    ContactDetailsList.splice(index,1);
+    localStorage.setItem('ContactList',JSON.stringify(ContactDetailsList));
+    document.querySelector(".person-count").textContent = ContactDetailsList.length;
+    createInnerHtml();
 }
